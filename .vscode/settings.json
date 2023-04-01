@@ -3,6 +3,7 @@
         "istream": "cpp",
         "iostream": "cpp",
         "map": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "tuple": "cpp"
     }
 }

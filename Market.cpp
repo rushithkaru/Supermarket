@@ -1,3 +1,6 @@
+#ifndef MARKET_H
+#define MARKET_H
+
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -86,3 +89,5 @@ void Market::printInventory(){
         cout << "Stock " << inventory.at(pair.first).getStock() << endl;
     }
 }
+
+#endif  // MARKET_H

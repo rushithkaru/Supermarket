@@ -6,7 +6,8 @@ using namespace std;
 #include <sstream>
 #include <vector>
 #include <tuple>
-
+#include "IdenticalDiscount.cpp"
+#include "SetDiscount.cpp"
 class Cart
 {
 private:
@@ -17,6 +18,9 @@ public:
     ~Cart();
     void createCartList(string file);
     void printCart();
+    vector<tuple<string, bool> > getCart();
+    void applyDiscounts(map<string,Product> inventory);
+    void createReceipt(map<string,Product> inventory, int receiptID);
 };
 
 Cart::Cart(/* args */)
@@ -71,4 +75,21 @@ void Cart::printCart(){
     for (auto element : cartData) {
         cout << get<0>(element) << " " << get<1>(element) << endl;
     }
+}
+
+vector<tuple<string, bool>> Cart::getCart(){
+    return cartData;
+}
+
+void Cart::applyDiscounts(map<string,Product> inventory){
+    IdenticalDiscount ident;
+    SetDiscount setD;
+    ident.applyDiscount(inventory,this->cartData);
+    setD.applyDiscount(inventory,this->cartData);
+}
+
+void Cart::createReceipt(map<string,Product> inventory, int receiptID){
+
+    cout << "THE RECEIPT " << endl;
+
 }

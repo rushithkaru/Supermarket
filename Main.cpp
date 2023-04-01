@@ -15,6 +15,6 @@ int main(int argc, char const *argv[])
     //cart.printCart();
     cart.applyDiscounts(market.getInventory());
     cart.createReceipt(market.getInventory(),0);
-    
+    cart.printCart();
     return 0;
 }

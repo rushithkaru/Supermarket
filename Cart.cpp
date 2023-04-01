@@ -84,7 +84,7 @@ vector<tuple<string, bool>> Cart::getCart(){
 void Cart::applyDiscounts(map<string,Product> inventory){
     IdenticalDiscount ident;
     SetDiscount setD;
-    ident.applyDiscount(inventory,this->cartData);
+    //ident.applyDiscount(inventory, this->cartData);
     setD.applyDiscount(inventory,this->cartData);
 }
 

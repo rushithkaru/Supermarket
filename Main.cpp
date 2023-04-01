@@ -8,7 +8,5 @@ int main(int argc, char const *argv[])
 {
     Market market;
     market.createInventory("Book1.csv");
-    
-
     return 0;
 }

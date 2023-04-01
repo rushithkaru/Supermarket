@@ -16,6 +16,7 @@ public:
     ~Market();
     void createInventory(string file);
     void createReceipt();
+    map<string,Product> getInventory();
 };
 
 Market::Market(/* args */)
@@ -76,5 +77,9 @@ void Market::createInventory(string file){
 
     }
 
+   
 }
 
+ map<string,Product> Market::getInventory(){
+        return this->inventory;
+}

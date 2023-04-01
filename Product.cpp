@@ -17,6 +17,7 @@ public:
     string getItem();
     float getPrice();
     int getStock();
+    void setStock(int soldAmount);
 };
 
 Product::Product(int category,string item,float price,int stock)
@@ -45,4 +46,8 @@ float Product::getPrice(){
 
 int Product::getStock(){
     return this->stock;
+}
+
+void Product::setStock(int soldAmount){
+    this->stock -= soldAmount;
 }

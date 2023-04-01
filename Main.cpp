@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
     cart.createCartList("Book2.csv");
     //cart.printCart();
     cart.applyDiscounts(market.getInventory());
-    cart.createReceipt(market.getInventory(),0);
-    cart.printCart();
+    cart.createReceipt(market.getInventory(),1);
+    //cart.printCart();
     return 0;
 }

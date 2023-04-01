@@ -13,6 +13,9 @@ class Cart
 private:
     /* data */
     vector<tuple<string, bool> > cartData;
+    float discount1Val;
+    float discount2Val;
+    float totalCost = 0.0;
 public:
     Cart(/* args */);
     ~Cart();
@@ -67,8 +70,13 @@ void Cart::createCartList(string file){
         for (int i = 0 ; i < quantity ; i++){
             cartData.push_back(make_tuple(item,true));
         }
-        
     }
+
+    if (cartData.size() == 0){
+        cerr << "Empty Cart: exiting program" << endl;
+        exit(1);
+    }
+    
 }
 
 void Cart::printCart(){
@@ -84,12 +92,42 @@ vector<tuple<string, bool>> Cart::getCart(){
 void Cart::applyDiscounts(map<string,Product> inventory){
     IdenticalDiscount ident;
     SetDiscount setD;
-    //ident.applyDiscount(inventory, this->cartData);
+    ident.applyDiscount(inventory, this->cartData);
+    this->discount1Val = ident.getDiscountVal();
     setD.applyDiscount(inventory,this->cartData);
+    this->discount2Val = setD.getDiscountVal();
 }
 
 void Cart::createReceipt(map<string,Product> inventory, int receiptID){
 
-    cout << "THE RECEIPT " << endl;
+    ofstream outfile;
+    outfile.open("Receipts/receipt.txt");
+    string txt = "RECEIPT";
+    outfile << txt << " " << receiptID << endl;
+
+    for (auto& row: cartData){
+        if (inventory.count(get<0>(row)) > 0){
+            if (get<1>(row)){
+                auto it = inventory.find(get<0>(row));
+                Product product = it->second;
+                outfile << get<0>(row) << " - " << product.getPrice() << "\n";
+                totalCost += product.getPrice();
+            }
+            else{
+                outfile << get<0>(row) << " - " << "(0.0)" << "\n";
+            }
+        }
+        else{
+            outfile << get<0>(row) << " - " << "Unavailable" << "\n";
+        }
+    }
+
+    outfile << "\n";
+
+    outfile << "Discount 1 Total - $ " << "(" << this->discount1Val << ")" << "\n";
+    outfile << "Discount 2 Total - $ " << "(" << this->discount2Val << ")" << "\n";
+    outfile << "Total - $ " << this->totalCost << "\n";
+
+    outfile.close();
 
 }

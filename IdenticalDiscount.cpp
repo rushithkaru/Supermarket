@@ -6,8 +6,14 @@ using namespace std;
 #include <tuple>
 class IdenticalDiscount : public IDiscount
 {
+private:
+    float discountTotal = 0.0;
 public:
-    void applyDiscount(map<string,Product> inventory , vector<tuple<string, bool>> &cartData) override {
+    void applyDiscount(map<string,Product> inventory , vector<tuple<string, bool>> &cartData) override;
+    float getDiscountVal();
+};
+
+void IdenticalDiscount::applyDiscount(map<string,Product> inventory , vector<tuple<string, bool>> &cartData) {
         
         string current = get<0>(cartData[0]);
         int repeat_counter = 0;
@@ -23,14 +29,17 @@ public:
                 }
                 if (repeat_counter > 0 && repeat_counter % 3 == 0){
                     get<1>(cartItem) = 0;
+                    auto it = inventory.find(get<0>(cartItem));
+                    Product product = it->second;
+                    discountTotal +=  product.getPrice();
                 }
             }
             else {
                 cout << "Not available:  " << endl;
             }  
         }
-    }
-};
+}
 
-
-
+float IdenticalDiscount::getDiscountVal(){
+    return discountTotal;
+}

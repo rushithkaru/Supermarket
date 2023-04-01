@@ -73,7 +73,11 @@ void Market::createInventory(string file){
 
         Product prod(product_category,item,unit_price,stock_val);
         inventory.insert(pair<const std::string, Product>(item,prod));
+    }
 
+    if (inventory.empty()){
+        cerr << "No inventory data: exiting program " << endl;
+        exit(1);
     }
 }
 

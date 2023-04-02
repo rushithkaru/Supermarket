@@ -1,0 +1,35 @@
+﻿Set,Item,Price,Stock
+0,book,15.0,12
+1,apple,4,4
+1,pear,3.2,100
+2,shampoo,5.1,12
+0,pen,7.02,300
+3,juice,7.2,21
+4,cake,5,12
+4,bread,9,11
+3,milk,2,15
+2,soap,4,28
+1,tomato,2,14
+4,bun,4.9,23
+0,pencil,1.2,10
+1,lettuce,2.5,15
+0,stapler,8.99,9
+1,grapes,3.99,23
+0,calculator,12.5,7
+2,toothbrush,2.99,18
+1,onion,1.25,35
+0,scissors,5.75,12
+1,strawberries,4.5,28
+0,printer paper,5.25,20
+2,toothpaste,3.75,22
+1,watermelon,7.5,8
+0,whiteboard markers,4.99,14
+2,dental floss,2.5,30
+1,peaches,3.75,25
+0,desk organizer,11.99,6
+1,pineapple,5.99,14
+2,mouthwash,5.25,18
+3,coffee,8.25,12
+4,croissant,1.5,30
+3,tea,4.5,40
+1,mango,3,23

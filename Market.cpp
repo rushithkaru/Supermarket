@@ -37,7 +37,7 @@ void Market::createInventory(string file){
 
     if (!myfile.good()){
         cout << "file error" << endl;
-        return;
+        exit(1);
     }
 
     // Handle file header

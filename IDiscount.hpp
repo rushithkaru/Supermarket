@@ -6,7 +6,8 @@
 #include <tuple>
 
 /* Interface for implementing discounts.
-* All discounts need to implement applydiscoun()
+* All discounts need to implement applydiscount() in order to 
+* make sure it is compatitble with the rest of the system. 
 */
 class IDiscount
 {

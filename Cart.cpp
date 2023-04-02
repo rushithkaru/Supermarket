@@ -26,7 +26,7 @@ private:
     float discount2Val;
     float totalCost = 0.0;
 public: 
-    void createCartList(string file,map<string,Product> inventory);
+    bool createCartList(string file,map<string,Product> inventory);
     void printCart();
     vector<tuple<string, bool> > getCart();
     void applyDiscounts(map<string,Product> inventory);
@@ -39,13 +39,13 @@ public:
 * 
 * @param file The name of the csv file
 */
-void Cart::createCartList(string file , map<string,Product> inventory){
+bool Cart::createCartList(string file , map<string,Product> inventory){
     ifstream myfile;
     myfile.open(file);
 
     if (!myfile.good()){
         cout << "file error" << endl;
-        exit(1);
+        return false;
     }
     // Handle file header
     string header,line;
@@ -77,7 +77,7 @@ void Cart::createCartList(string file , map<string,Product> inventory){
 
         for (int i = 0 ; i < quantity ; i++){
             /*Check if the item is in the inventory and
-            * add to vector.
+            * add it to cartData.
             */
             if (inventory.count(item) > 0){
                 cartData.push_back(make_tuple(item,true));
@@ -90,10 +90,10 @@ void Cart::createCartList(string file , map<string,Product> inventory){
 
     //Check if the cart is empty and exit if needed
     if (cartData.size() == 0){
-        cerr << "Empty Cart: exiting program" << endl;
-        exit(1);
+        cerr << "Empty Cart:" << endl;
+        return false;
     }
-
+    return true;
 }
 
 /* Method to print cart items. (For debugging)
@@ -112,23 +112,33 @@ vector<tuple<string, bool>> Cart::getCart(){
 /* Method to apply all discounts on the cart.
 * Methods should implement the IDiscount interface.
 *
-* @ param invenory data
+* @param invenory data
 */
 void Cart::applyDiscounts(map<string,Product> inventory){
     /* Use relevant discount classes here.
     */
-    IdenticalDiscount ident;
-    SetDiscount setD;
-    ident.applyDiscount(inventory, this->cartData);
-    this->discount1Val = ident.getDiscountVal();
-    setD.applyDiscount(inventory,this->cartData);
-    this->discount2Val = setD.getDiscountVal();
+    IdenticalDiscount identicalDiscount;
+    SetDiscount setDiscount;
+
+    identicalDiscount.applyDiscount(inventory, this->cartData);
+    this->discount1Val = identicalDiscount.getDiscountVal();
+    setDiscount.applyDiscount(inventory,this->cartData);
+    this->discount2Val = setDiscount.getDiscountVal();
+
 }
 
-
+/* Create and write to receipt. 
+* Outputs to the .txt file in the following format.
+* Item (Qty x) - $total_price
+*
+* @param: inventory data
+* @param: receiptID (for multiple carts)
+* @return: updated inventory data
+*/
 map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int receiptID){
     ofstream outfile;
-    outfile.open("Receipts/receipt.txt");
+    string receiptFile = "Receipts/receipt" + to_string(receiptID) + ".txt";
+    outfile.open(receiptFile);
     string txt = "RECEIPT";
     outfile << txt << " " << receiptID << endl;
     string currentItem = get<0>(cartData[0]);
@@ -140,7 +150,7 @@ map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int rece
     for (auto& row: cartData){
         string currentRow = get<0>(row);
         if (inventory.count(currentRow) > 0){
-            // Out put current cart item data to receipt
+            // Output current cart item data to receipt
             if (currentRow != currentItem){
                 Product product = inventory.find(currentRow)->second;
                 outfile <<  item.name << " (Qty " << quantity << ")" << " - $" << item.price << "\n";
@@ -148,8 +158,10 @@ map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int rece
                 quantity = 0;
                 item.name = currentRow;
                 currentItem = currentRow;
+                //add any discount data to the receipt
                 if (discountedQty > 0){
-                    outfile <<  discountedItem.name << " (Qty " << discountedQty << ")" << " - ($" << discountedItem.price << ")" << "\n";
+                    outfile <<  discountedItem.name << " (Discount Qty " << discountedQty << ")" 
+                    << " - ($" << discountedItem.price << ")" << "\n";
                 }
                 discountedQty = 0;
                 discountedItem.name = currentRow;
@@ -157,7 +169,7 @@ map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int rece
             }
             //Check if item is instock
             if (checkStock(inventory,currentItem)){
-                //Check if item is not discounted
+                //Check if item is not discounted.
                 if (get<1>(row)){
                     Product product = inventory.find(currentRow)->second;
                     item.price += product.getPrice();
@@ -165,7 +177,7 @@ map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int rece
                     totalCost += product.getPrice();
                     inventory.find(currentRow)->second.setStock(1);
                 }
-                //If discounted update approriate variable
+                //If discounted update approriate variables.
                 else{
                     Product product = inventory.find(currentRow)->second;
                     discountedItem.price += product.getPrice();
@@ -181,14 +193,22 @@ map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int rece
             outfile << get<0>(row) << " - " << "Unavailable" << "\n";
         }
     }
-
+    //print last row of receipt
+    Product product = inventory.find(get<0>(cartData.back()))->second;
+    outfile <<  item.name << " (Qty " << quantity << ")" << " - $" << item.price << "\n";
+    if (discountedQty > 0){
+        outfile <<  discountedItem.name << " (Discount Qty " << discountedQty << ")" 
+        << " - ($" << discountedItem.price << ")" << "\n";
+    }
     //write the discount values and total cost to receipt.
     outfile << "\n";
     outfile << "Discount 1 Total - $ " << "(" << this->discount1Val << ")" << "\n";
     outfile << "Discount 2 Total - $ " << "(" << this->discount2Val << ")" << "\n";
-    outfile << "Total - $ " << this->totalCost << "\n";
+    outfile << "Grand Total - $ " << this->totalCost << "\n";
 
     outfile.close();
+
+    cout << "Receipt " << receiptID << " created successfully" << endl;
 
     return inventory;
 }

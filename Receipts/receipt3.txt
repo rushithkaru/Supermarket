@@ -1,0 +1,21 @@
+RECEIPT 3
+grapes (Qty 4) - $15.96
+grapes (Discount Qty 4) - ($15.96)
+book (Qty 5) - $75
+book (Discount Qty 2) - ($30)
+onion (Qty 3) - $3.75
+onion (Discount Qty 3) - ($3.75)
+milk (Qty 4) - $8
+milk (Discount Qty 1) - ($2)
+toothbrush (Qty 6) - $17.94
+toothbrush (Discount Qty 3) - ($8.97)
+shampoo (Qty 1) - $5.1
+toothpaste (Qty 2) - $7.5
+toothpaste (Discount Qty 1) - ($3.75)
+watermelon (Qty 2) - $15
+lettuce (Qty 2) - $5
+apple (Qty 1) - $4
+
+Discount 1 Total - $ (59.19)
+Discount 2 Total - $ (11.25)
+Grand Total - $ 157.25

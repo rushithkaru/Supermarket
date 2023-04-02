@@ -17,19 +17,20 @@ public:
 };
 
 /* applyDiscount() implementation
-*
+* For every 3 identical purchases the third is free
 * @param inventory (map of inventory data)
 * @param cartData (vector of the items in the cart)
 */
 void IdenticalDiscount::applyDiscount(map<string,Product> inventory , vector<tuple<string, bool>> &cartData) {
         
         string current = get<0>(cartData[0]);
-        int repeat_counter = 0;
+        int repeat_counter = 1;
 
         for (auto &cartItem : cartData){
             string item = get<0>(cartItem);
             //Check if item is in the inventory
             if (inventory.count(item) > 0){
+                //check for repeats 
                 if (item != current){
                     current = item;
                     repeat_counter = 1;

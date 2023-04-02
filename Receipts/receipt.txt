@@ -1,0 +1,39 @@
+RECEIPT 1
+book - 15
+book - 15
+book - (0.0)
+apple - 4
+apple - 4
+pen - 7.02
+pen - 7.02
+pen - (0.0)
+pen - 7.02
+juice - 7.2
+juice - 7.2
+juice - (0.0)
+cake - 5
+cake - 5
+cake - (0.0)
+cake - 5
+bread - 9
+bread - 9
+strawberry - 3.2
+strawberry - 3.2
+strawberry - (0.0)
+strawberry - 3.2
+tomato - (0.0)
+tomato - 2
+tomato - (0.0)
+tomato - 2
+tomato - 2
+jam bun - (0.0)
+jam bun - 4.9
+jam bun - (0.0)
+jam bun - 4.9
+pencil - (0.0)
+pencil - 1.2
+pencil - (0.0)
+
+Discount 1 Total - $ (45.52)
+Discount 2 Total - $ (8.1)
+Total - $ 133.06

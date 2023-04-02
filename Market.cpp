@@ -1,3 +1,6 @@
+#ifndef MARKET_H
+#define MARKET_H
+
 #include <iostream>
 #include <fstream>
 using namespace std;
@@ -17,6 +20,7 @@ public:
     void createInventory(string file);
     void createReceipt();
     map<string,Product> getInventory();
+    void printInventory();
 };
 
 Market::Market(/* args */)
@@ -69,17 +73,25 @@ void Market::createInventory(string file){
 
         Product prod(product_category,item,unit_price,stock_val);
         inventory.insert(pair<const std::string, Product>(item,prod));
-
-        cout << "Cat " << inventory.at(item).getCategory() << endl;
-        cout << "Item " << inventory.at(item).getItem() << endl;
-        cout << "Price " << inventory.at(item).getPrice() << endl;
-        cout << "Stock " << inventory.at(item).getStock() << endl;
-
     }
 
-   
+    if (inventory.empty()){
+        cerr << "No inventory data: exiting program " << endl;
+        exit(1);
+    }
 }
 
- map<string,Product> Market::getInventory(){
+map<string,Product> Market::getInventory(){
         return this->inventory;
 }
+
+void Market::printInventory(){
+    for (const auto& pair : inventory) {
+        cout << "Cat " << inventory.at(pair.first).getCategory() << endl;
+        cout << "Item " << inventory.at(pair.first).getItem() << endl;
+        cout << "Price " << inventory.at(pair.first).getPrice() << endl;
+        cout << "Stock " << inventory.at(pair.first).getStock() << endl;
+    }
+}
+
+#endif  // MARKET_H

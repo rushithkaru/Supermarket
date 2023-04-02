@@ -1,5 +1,8 @@
 #include <iostream>
 using namespace std;
+#ifndef PRODUCT_H
+#define PRODUCT_H
+#define NUM_CATEGORIES 5
 
 class Product
 {
@@ -51,3 +54,6 @@ int Product::getStock(){
 void Product::setStock(int soldAmount){
     this->stock -= soldAmount;
 }
+
+
+#endif // PRODUCT_H

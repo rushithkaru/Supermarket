@@ -17,6 +17,7 @@
         "__functional_base": "cpp",
         "utility": "cpp",
         "*.tcc": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "__tree": "cpp"
     }
 }

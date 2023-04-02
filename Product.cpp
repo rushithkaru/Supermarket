@@ -8,11 +8,12 @@ struct Item {
         float price;
         int index;
     };
-    
+
+//Class for representing a product available in the supermarket
 class Product
 {
 private:
-    /* data */
+    //category refers to the set each product belongs to
     int category;
     string item;
     float price;
@@ -20,7 +21,6 @@ private:
     
 public:
     Product(int category,string item,float price,int stock);
-    ~Product();
     int getCategory();
     string getItem();
     float getPrice();
@@ -36,9 +36,7 @@ Product::Product(int category,string item,float price,int stock)
     this->stock = stock;
 }
 
-Product::~Product()
-{
-}
+//getters and setters
 
 int Product::getCategory(){
     return this->category;

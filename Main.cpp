@@ -11,14 +11,16 @@ int main(int argc, char const *argv[])
     Market market;
     market.createInventory("Book1.csv");
     Cart cart;
-    //market.printInventory();
-    cart.createCartList("Book2.csv");
-    //cart.printCart();
+    cart.createCartList("Book2.csv", market.getInventory());
     cart.applyDiscounts(market.getInventory());
     map<string,Product> updatedInventory = cart.createReceipt(market.getInventory(),1);
-    //cart.printCart();
-    cout << "\n";
     market.setInventory(updatedInventory);
-    //market.printInventory();
+
+    /*cout << "You have entered " << argc << " arguments:"
+         << "\n";
+ 
+    for (int i = 1; i < argc; ++i)
+        cout << argv[i] << "\n";*/
+
     return 0;
 }

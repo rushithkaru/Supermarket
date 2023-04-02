@@ -6,11 +6,12 @@ using namespace std;
 #include <tuple>
 #include <queue>
 
-
+/*Class to implement discount type 2
+*/
 class SetDiscount : public IDiscount
 {
 private:
-
+    //Total discount cost for this type of discount
     float discountVal = 0;
 
 public:
@@ -21,6 +22,12 @@ public:
 
 };
 
+/* Method takes a vector of all items in the same 
+* set and adds the discount to the cheapest item.
+*
+* @param items (vector<Item>) all eligible items in the same set (category)
+* @param cartData (vector of the items in the cart)
+*/
 void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &cartData){
     if (items.size()){
         string currentItem = items.front().name;
@@ -29,7 +36,9 @@ void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &ca
         int minIndex = 0;
         int temp = 0;
         for (int i = 1; i < items.size(); i++) {
-                
+                /* find if there are three items in the 
+                * same set and apply discount to the 
+                * cheapest item.*/
                 if (items[i].name != currentItem){
                     currentItem = items[i].name;
                     counter++;
@@ -49,22 +58,26 @@ void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &ca
                 }
         }
     }
-
-    for (int i = 0; i < items.size(); i++) {
-            //std::cout << items[i].name << " (" << items[i].price << ") " << endl;
-    }
 }
 
+/*
+* applyDiscount() implementation
+*
+* Method updates the cartData vector and sets saves the items that will be free
+* based on this discount type.
+*
+* @param inventory (map of inventory data)
+* @param cartData (vector of the items in the cart)
+*/
 void SetDiscount::applyDiscount(map<string,Product> inventory , vector<tuple<string, bool>> &cartData)  {
 
         for (int category = 0 ; category < NUM_CATEGORIES ; category++){
             vector<Item> items;
             int index = 0;
             for (const auto&  cartItem : cartData){
-                
-                auto it = inventory.find(get<0>(cartItem));
-                Product product = it->second;
 
+                Product product = inventory.find(get<0>(cartItem))->second;
+                //Create vector of items in the same category
                 if (product.getCategory() == category && get<1>(cartItem)){
                     Item newItem = {product.getItem() , product.getPrice(),index};
                     items.push_back(newItem);

@@ -36,6 +36,7 @@ void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &ca
         int minIndex = 0;
         int temp = 0;
         for (int i = 1; i < items.size(); i++) {
+
                 /* find if there are three items in the 
                 * same set and apply discount to the 
                 * cheapest item.*/
@@ -45,14 +46,12 @@ void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &ca
                     if (currentMin >  items[i].price){
                         currentMin = items[i].price;
                         minIndex = items[i].index;
-                        //not needed
                         temp = i;
                     }
                 }
                 if (counter == 3){
                     get<1>(cartData[minIndex]) = false;
-                    this->discountVal += items[i].price;
-                    //not needed
+                    this->discountVal += items[temp].price;
                     items[temp].price = 0;
                     break;
                 }
@@ -74,9 +73,11 @@ void SetDiscount::applyDiscount(map<string,Product> inventory , vector<tuple<str
         for (int category = 0 ; category < NUM_CATEGORIES ; category++){
             vector<Item> items;
             int index = 0;
-            for (const auto&  cartItem : cartData){
 
-                Product product = inventory.find(get<0>(cartItem))->second;
+            for (const auto&  cartItem : cartData){    
+                auto it = inventory.find(get<0>(cartItem));
+                Product product = it->second;
+                
                 //Create vector of items in the same category
                 if (product.getCategory() == category && get<1>(cartItem)){
                     Item newItem = {product.getItem() , product.getPrice(),index};

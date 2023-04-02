@@ -36,11 +36,11 @@ Cart::~Cart()
 
 void Cart::createCartList(string file){
     ifstream myfile;
-    myfile.open(file);
+    myfile.open("Book2.csv");
 
     if (!myfile.good()){
         cout << "file error" << endl;
-        return;
+        exit(1);
     }
 
     string header,line;
@@ -76,7 +76,7 @@ void Cart::createCartList(string file){
         cerr << "Empty Cart: exiting program" << endl;
         exit(1);
     }
-    
+
 }
 
 void Cart::printCart(){
@@ -90,6 +90,11 @@ vector<tuple<string, bool>> Cart::getCart(){
 }
 
 void Cart::applyDiscounts(map<string,Product> inventory){
+    /*Instantiate discount classes. These implement a method called applyDiscount.
+    Add future discount types to this method as long as they implement the IDiscount 
+    interface.
+    */
+
     IdenticalDiscount ident;
     SetDiscount setD;
     ident.applyDiscount(inventory, this->cartData);

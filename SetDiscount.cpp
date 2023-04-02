@@ -15,8 +15,7 @@ struct Item {
 class SetDiscount : public IDiscount
 {
 private:
-    //map of cheapest item in each category (set)
-    map<int,float> cheapestItem;
+
     float discountVal = 0;
 
 public:

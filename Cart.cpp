@@ -18,7 +18,7 @@ class Cart
 {
 private:
     /* Vector to store cart data.
-    * Stored as tuple (string: name of item, bool: check if discount applied).
+    * Stored as a tuple (string: name of item, bool: check if discount applied).
     */
     vector<tuple<string, bool>> cartData;
     // Discount totals and receipt total
@@ -37,7 +37,7 @@ public:
 * Populates cart information. 
 * Data is taken from a csv file. 
 * 
-* @param file The name of the csv file
+* @param file: The name of the csv file
 */
 bool Cart::createCartList(string file , map<string,Product> inventory){
     ifstream myfile;
@@ -147,6 +147,7 @@ map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int rece
     int quantity = 0;
     int discountedQty = 0;
 
+    //iterate through cart and print to receipt
     for (auto& row: cartData){
         string currentRow = get<0>(row);
         if (inventory.count(currentRow) > 0){

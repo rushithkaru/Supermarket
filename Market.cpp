@@ -21,6 +21,7 @@ public:
     void createReceipt();
     map<string,Product> getInventory();
     void printInventory();
+    void setInventory(map<string,Product> inventory);
 };
 
 Market::Market(/* args */)
@@ -92,6 +93,10 @@ void Market::printInventory(){
         cout << "Price " << inventory.at(pair.first).getPrice() << endl;
         cout << "Stock " << inventory.at(pair.first).getStock() << endl;
     }
+}
+
+void Market::setInventory(map<string,Product> inventory){
+    this->inventory = inventory;
 }
 
 #endif  // MARKET_H

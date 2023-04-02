@@ -6,11 +6,6 @@ using namespace std;
 #include <tuple>
 #include <queue>
 
-struct Item {
-        string name;
-        float price;
-        int index;
-    };
 
 class SetDiscount : public IDiscount
 {
@@ -56,7 +51,7 @@ void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &ca
     }
 
     for (int i = 0; i < items.size(); i++) {
-            std::cout << items[i].name << " (" << items[i].price << ") " << endl;
+            //std::cout << items[i].name << " (" << items[i].price << ") " << endl;
     }
 }
 

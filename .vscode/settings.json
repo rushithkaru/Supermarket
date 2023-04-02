@@ -9,6 +9,14 @@
         "string": "cpp",
         "filesystem": "cpp",
         "__tuple": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "array": "cpp",
+        "locale": "cpp",
+        "memory": "cpp",
+        "variant": "cpp",
+        "__functional_base": "cpp",
+        "utility": "cpp",
+        "*.tcc": "cpp",
+        "functional": "cpp"
     }
 }

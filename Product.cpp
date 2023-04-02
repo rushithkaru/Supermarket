@@ -3,7 +3,12 @@ using namespace std;
 #ifndef PRODUCT_H
 #define PRODUCT_H
 #define NUM_CATEGORIES 5
-
+struct Item {
+        string name;
+        float price;
+        int index;
+    };
+    
 class Product
 {
 private:

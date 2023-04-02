@@ -8,6 +8,9 @@ using namespace std;
 #include <tuple>
 #include "IdenticalDiscount.cpp"
 #include "SetDiscount.cpp"
+
+bool checkStock(map<string,Product> inventory, string item);
+
 class Cart
 {
 private:
@@ -23,7 +26,7 @@ public:
     void printCart();
     vector<tuple<string, bool> > getCart();
     void applyDiscounts(map<string,Product> inventory);
-    void createReceipt(map<string,Product> inventory, int receiptID);
+    map<string,Product>  createReceipt(map<string,Product> inventory, int receiptID);
 };
 
 Cart::Cart(/* args */)
@@ -103,24 +106,57 @@ void Cart::applyDiscounts(map<string,Product> inventory){
     this->discount2Val = setD.getDiscountVal();
 }
 
-void Cart::createReceipt(map<string,Product> inventory, int receiptID){
+map<string,Product>  Cart::createReceipt(map<string,Product> inventory, int receiptID){
 
     ofstream outfile;
     outfile.open("Receipts/receipt.txt");
     string txt = "RECEIPT";
     outfile << txt << " " << receiptID << endl;
+    string currentItem = get<0>(cartData[0]);
+    Item item = {currentItem,0.0};
+    Item discountedItem = {currentItem,0.0};
+    int quantity = 0;
+    int discountedQty = 0;
 
     for (auto& row: cartData){
         if (inventory.count(get<0>(row)) > 0){
-            if (get<1>(row)){
+            //put in function
+            if (get<0>(row) != currentItem){
                 auto it = inventory.find(get<0>(row));
                 Product product = it->second;
-                outfile << get<0>(row) << " - " << product.getPrice() << "\n";
+                outfile <<  item.name << " (Qty " << quantity << ")" << " - $" << item.price << "\n";
+                item.price = 0.0;
+                quantity = 0;
+                item.name = get<0>(row);
+                currentItem = get<0>(row);
+                if (discountedQty > 0){
+                    outfile <<  discountedItem.name << " (Qty " << discountedQty << ")" << " - ($" << discountedItem.price << ")" << "\n";
+
+                }
+                discountedQty = 0;
+                discountedItem.name = get<0>(row);
+                discountedItem.price = 0;
+            }
+            if (checkStock(inventory,get<0>(row))){
+                if (get<1>(row)){
+                auto it = inventory.find(get<0>(row));
+                Product product = it->second;
+                item.price += product.getPrice();
+                quantity++;
                 totalCost += product.getPrice();
+                inventory.find(get<0>(row))->second.setStock(1);
             }
+                else{
+                    auto it = inventory.find(get<0>(row));
+                    Product product = it->second;
+                    discountedItem.price += product.getPrice();
+                    discountedQty++;
+                    inventory.find(get<0>(row))->second.setStock(1);
+                }
+            } 
             else{
-                outfile << get<0>(row) << " - " << "(0.0)" << "\n";
-            }
+                cout << "Insufficient stock of item: " << get<0>(row) << endl;
+            }        
         }
         else{
             outfile << get<0>(row) << " - " << "Unavailable" << "\n";
@@ -128,11 +164,18 @@ void Cart::createReceipt(map<string,Product> inventory, int receiptID){
     }
 
     outfile << "\n";
-
     outfile << "Discount 1 Total - $ " << "(" << this->discount1Val << ")" << "\n";
     outfile << "Discount 2 Total - $ " << "(" << this->discount2Val << ")" << "\n";
     outfile << "Total - $ " << this->totalCost << "\n";
 
     outfile.close();
 
+    return inventory;
+}
+
+bool checkStock(map<string,Product> inventory, string item){
+    if (inventory.find(item)->second.getStock() > 0){
+        return true;
+    }
+    return false;
 }

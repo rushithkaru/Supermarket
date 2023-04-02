@@ -4,6 +4,7 @@ using namespace std;
 #include "Market.cpp"
 #include "Cart.cpp"
 
+#include "Product.cpp"
 
 int main(int argc, char const *argv[])
 {
@@ -14,7 +15,10 @@ int main(int argc, char const *argv[])
     cart.createCartList("Book2.csv");
     //cart.printCart();
     cart.applyDiscounts(market.getInventory());
-    cart.createReceipt(market.getInventory(),1);
+    map<string,Product> updatedInventory = cart.createReceipt(market.getInventory(),1);
     //cart.printCart();
+    cout << "\n";
+    market.setInventory(updatedInventory);
+    //market.printInventory();
     return 0;
 }

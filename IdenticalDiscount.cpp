@@ -24,7 +24,7 @@ public:
 void IdenticalDiscount::applyDiscount(map<string,Product> inventory , vector<tuple<string, bool>> &cartData) {
         
         string current = get<0>(cartData[0]);
-        int repeat_counter = 1;
+        int repeat_counter = 0;
 
         for (auto &cartItem : cartData){
             string item = get<0>(cartItem);

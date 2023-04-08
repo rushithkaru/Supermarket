@@ -1,0 +1,13 @@
+RECEIPT 3
+grapes (Qty 1) - $3.99
+onion (Qty 1) - $1.25
+onion (Discount Qty 1) - ($1.25)
+tomato (Qty 2) - $4
+book (Qty 0) - $0
+pencil (Qty 0) - $0
+pencil (Discount Qty 1) - ($1.2)
+pen (Qty 1) - $7.02
+
+Discount 1 Total - $ (15)
+Discount 2 Total - $ (2.45)
+Grand Total - $ 16.26

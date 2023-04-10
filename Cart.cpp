@@ -112,7 +112,7 @@ vector<tuple<string, bool>> Cart::getCart(){
 /* Method to apply all discounts on the cart.
 * Methods should implement the IDiscount interface.
 *
-* @param invenory data
+* @param inventory data
 */
 void Cart::applyDiscounts(map<string,Product> inventory){
     /* Use relevant discount classes here.

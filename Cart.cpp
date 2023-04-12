@@ -2,8 +2,6 @@
 #include <fstream>
 using namespace std;
 #include <map>
-#include <string>
-#include <sstream>
 #include <vector>
 #include <tuple>
 #include "IdenticalDiscount.cpp"

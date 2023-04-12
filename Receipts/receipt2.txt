@@ -1,8 +1,6 @@
 RECEIPT 2
-book (Qty 1) - $15
+book (Qty 4) - $60
 book (Discount Qty 1) - ($15)
-coffee (Qty 4) - $33
-coffee (Discount Qty 2) - ($16.5)
 grapes (Qty 6) - $23.94
 grapes (Discount Qty 3) - ($11.97)
 pen (Qty 4) - $28.08
@@ -19,6 +17,6 @@ lettuce (Qty 1) - $2.5
 printer paper (Qty 1) - $5.25
 printer paper (Discount Qty 2) - ($10.5)
 
-Discount 1 Total - $ (75.12)
+Discount 1 Total - $ (58.62)
 Discount 2 Total - $ (8.45)
-Grand Total - $ 153.52
+Grand Total - $ 165.52

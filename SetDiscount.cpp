@@ -62,7 +62,7 @@ void SetDiscount::updateCart(vector<Item> items, vector<tuple<string, bool>> &ca
 /*
 * applyDiscount() implementation
 *
-* Method updates the cartData vector and sets saves the items that will be free
+* Method updates the cartData vector and saves the items that will be free
 * based on this discount type.
 *
 * @param inventory (map of inventory data)
@@ -86,7 +86,7 @@ void SetDiscount::applyDiscount(map<string,Product> inventory , vector<tuple<str
                 index++;
             }
 
-        updateCart(items,cartData);
+            updateCart(items,cartData);
         }       
 }
 

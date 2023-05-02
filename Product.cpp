@@ -3,11 +3,7 @@ using namespace std;
 #ifndef PRODUCT_H
 #define PRODUCT_H
 #define NUM_CATEGORIES 5
-struct Item {
-        string name;
-        float price;
-        int index;
-    };
+
 
 //Class for representing a product available in the supermarket
 class Product
@@ -37,7 +33,11 @@ Product::Product(int category,string item,float price,int stock)
 }
 
 //getters and setters
-
+struct Item {
+        string name;
+        float price;
+        int index;
+    };
 int Product::getCategory(){
     return this->category;
 }

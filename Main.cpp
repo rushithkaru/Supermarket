@@ -3,7 +3,7 @@ using namespace std;
 #include "Market.cpp"
 #include "Cart.cpp"
 #include "Product.cpp"
-#define MIN_INPUT_ARGS 3
+#define  MIN_INPUT_ARGS 3
 
 int main(int argc, char const *argv[])
 {

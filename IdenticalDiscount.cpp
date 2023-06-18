@@ -5,7 +5,7 @@ using namespace std;
 #include <vector>
 #include <tuple>
 
-//Class to implement discount type 1.
+
 class IdenticalDiscount : public IDiscount
 {
 private:

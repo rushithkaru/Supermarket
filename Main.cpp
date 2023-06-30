@@ -4,7 +4,7 @@ using namespace std;
 #include "Cart.cpp"
 #include "Product.cpp"
 #define  MIN_INPUT_ARGS 3
-
+#define  dsn 2
 int main(int argc, char const *argv[])
 {
     if (argc < MIN_INPUT_ARGS){

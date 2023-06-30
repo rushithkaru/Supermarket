@@ -24,5 +24,7 @@ int main(int argc, char const *argv[])
         market.setInventory(updatedInventory);
     }
     //reandomco
+
+    //
     return 0;
 }

@@ -23,6 +23,6 @@ int main(int argc, char const *argv[])
         map<string,Product> updatedInventory = cart.createReceipt(market.getInventory(),i-1);
         market.setInventory(updatedInventory);
     }
-
+    //reandomco
     return 0;
 }
